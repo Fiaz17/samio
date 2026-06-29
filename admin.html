@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Samio Enterprise</title>
+    
+    <!-- External CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- Authentication Gate Screen -->
+    <div class="login-overlay" id="admin-login-screen">
+        <div class="login-card">
+            <div class="login-logo">S</div>
+            <h1 class="login-title">Samio Enterprise</h1>
+            <p class="login-subtitle">Dashboard Administrative Login Access</p>
+            
+            <form id="login-form-submit">
+                <div class="form-group">
+                    <label for="login-username">Admin User ID</label>
+                    <input type="text" id="login-username" class="form-control" placeholder="Enter administrative username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Security Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-submit">Authenticate Portal <i class="fa fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Administrative App Header -->
+    <header>
+        <div class="container header-container">
+            <div class="brand-wrapper">
+                <div class="brand-logo">S</div>
+                <span class="brand-title">Samio Enterprise Admin Dashboard</span>
+            </div>
+            
+            <button class="btn-logout" id="portal-logout-btn">
+                <i class="fa fa-sign-out-alt"></i> Terminate Session
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="admin-main">
+        <div class="container">
+            
+            <!-- Dynamic Realtime Counter Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon categories"><i class="fa fa-folder"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-total-categories">0</h3>
+                        <p>Total Categories</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon products"><i class="fa fa-box"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-total-products">0</h3>
+                        <p>Total Products</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon featured"><i class="fa fa-star"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-total-featured">0</h3>
+                        <p>Featured Products</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon views"><i class="fa fa-eye"></i></div>
+                    <div class="stat-info">
+                        <h3>1,428</h3>
+                        <p>Total Page Queries</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Navigation Tabs -->
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-panel="panel-categories"><i class="fa fa-folder"></i> Categories</button>
+                <button class="tab-btn" data-panel="panel-products"><i class="fa fa-box"></i> Products Catalogue</button>
+                <button class="tab-btn" data-panel="panel-banners"><i class="fa fa-images"></i> Home Banners</button>
+                <button class="tab-btn" data-panel="panel-portfolio"><i class="fa fa-camera-retro"></i> Portfolios</button>
+                <button class="tab-btn" data-panel="panel-settings"><i class="fa fa-sliders-h"></i> SEO & WhatsApp</button>
+            </div>
+
+            <!-- TAB 1: Categories Tab Panel -->
+            <div class="tab-panel active" id="panel-categories">
+                <div class="panel-header">
+                    <h2 class="panel-title">Manage Product Categories</h2>
+                    <button class="btn-action" onclick="toggleForm('category-form-section')"><i class="fa fa-plus"></i> Add New Category</button>
+                </div>
+                
+                <!-- Category CRUD Add/Edit Form Section -->
+                <div class="form-section" id="category-form-section">
+                    <h3 class="form-section-title" id="category-form-header-title"><i class="fa fa-plus-circle"></i> Add Custom Category</h3>
+                    <form id="category-crud-form">
+                        <input type="hidden" id="category-id-field">
+                        <div class="form-group">
+                            <label for="category-name-field">Category Name</label>
+                            <input type="text" id="category-name-field" class="form-control" placeholder="e.g. Crest Awards" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Cover Image</label>
+                            <div class="upload-zone" id="category-upload-zone">
+                                <input type="file" id="category-image-file" accept="image/*">
+                                <span class="upload-zone-label"><i class="fa fa-cloud-upload-alt"></i> Click or drag to upload photo</span>
+                            </div>
+                            <div class="upload-progress" id="category-upload-progress">
+                                <div class="upload-progress-bar" id="category-upload-bar"></div>
+                            </div>
+                            <div class="url-divider">— or paste image URL / Google Drive share link —</div>
+                            <input type="url" id="category-image-field" class="form-control" placeholder="https://drive.google.com/file/d/... or any image URL">
+                            <div class="quick-preview-box" id="category-img-preview-box">
+                                <img src="" alt="" id="category-img-preview-tag">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category-desc-field">Short Description</label>
+                            <input type="text" id="category-desc-field" class="form-control" placeholder="Brief summary of category products..." required>
+                        </div>
+                        <div class="action-row-btns">
+                            <button type="submit" class="btn-action">Save Category</button>
+                            <button type="button" class="btn-cancel" onclick="closeForm('category-form-section', 'category-crud-form')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Category Name</th>
+                                <th>Description</th>
+                                <th style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: Products Tab Panel -->
+            <div class="tab-panel" id="panel-products">
+                <div class="panel-header">
+                    <h2 class="panel-title">Products Catalogue Management</h2>
+                    <button class="btn-action" onclick="toggleForm('product-form-section')"><i class="fa fa-plus"></i> Add New Product</button>
+                </div>
+
+                <div class="form-group" style="max-width: 300px; margin-bottom: 2rem;">
+                    <label for="product-category-filter"><i class="fa fa-filter"></i> Category Filter:</label>
+                    <select id="product-category-filter" class="form-control">
+                        <option value="all">Display All Products</option>
+                        <!-- Dynamic categories select populate -->
+                    </select>
+                </div>
+
+                <!-- Product CRUD Form -->
+                <div class="form-section" id="product-form-section">
+                    <h3 class="form-section-title" id="product-form-header-title"><i class="fa fa-box"></i> Add Catalogue Product</h3>
+                    <form id="product-crud-form">
+                        <input type="hidden" id="product-id-field">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-name-field">Product Name</label>
+                                <input type="text" id="product-name-field" class="form-control" placeholder="e.g. Prestige Glass Trophy" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-cat-field">Product Category</label>
+                                <select id="product-cat-field" class="form-control" required>
+                                    <!-- Populated dynamically -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-desc-field">Detailed Description</label>
+                            <textarea id="product-desc-field" class="form-control" rows="4" placeholder="Detailed product specifications, sizes, customized options..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Images</label>
+                            <div class="upload-zone" id="product-upload-zone">
+                                <input type="file" id="product-image-file" accept="image/*" multiple>
+                                <span class="upload-zone-label"><i class="fa fa-cloud-upload-alt"></i> Click or drag to upload (select multiple)</span>
+                            </div>
+                            <div class="upload-progress" id="product-upload-progress">
+                                <div class="upload-progress-bar" id="product-upload-bar"></div>
+                            </div>
+                            <div class="url-divider">— or paste image URLs / Google Drive links (comma-separated) —</div>
+                            <input type="text" id="product-images-field" class="form-control" placeholder="https://drive.google.com/file/d/... (comma-separate for multiple)">
+                            <div class="quick-preview-box" id="product-img-preview-box">
+                                <img src="" alt="" id="product-img-preview-tag">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-tags-field">Tags (Comma Separated)</label>
+                                <input type="text" id="product-tags-field" class="form-control" placeholder="e.g. crystal, crest, trophy">
+                            </div>
+                            <div class="form-group" style="display:flex; align-items:center;">
+                                <div class="featured-check-wrapper">
+                                    <input type="checkbox" id="product-featured-field">
+                                    <label for="product-featured-field">Feature Product on Storefront Home</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-row-btns">
+                            <button type="submit" class="btn-action">Save Product</button>
+                            <button type="button" class="btn-cancel" onclick="closeForm('product-form-section', 'product-crud-form')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Featured</th>
+                                <th>Tags</th>
+                                <th style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 3: Banners Slider Panel -->
+            <div class="tab-panel" id="panel-banners">
+                <div class="panel-header">
+                    <h2 class="panel-title">Slideshow Banners Manager</h2>
+                    <button class="btn-action" onclick="toggleForm('banner-form-section')"><i class="fa fa-plus"></i> Add New Slide</button>
+                </div>
+
+                <!-- Banners CRUD Form -->
+                <div class="form-section" id="banner-form-section">
+                    <h3 class="form-section-title" id="banner-form-header-title"><i class="fa fa-images"></i> Add Slideshow Banner</h3>
+                    <form id="banner-crud-form">
+                        <input type="hidden" id="banner-id-field">
+                        <div class="form-group">
+                            <label>Slideshow Banner Image</label>
+                            <div class="upload-zone" id="banner-upload-zone">
+                                <input type="file" id="banner-image-file" accept="image/*">
+                                <span class="upload-zone-label"><i class="fa fa-cloud-upload-alt"></i> Click or drag to upload slide background</span>
+                            </div>
+                            <div class="upload-progress" id="banner-upload-progress">
+                                <div class="upload-progress-bar" id="banner-upload-bar"></div>
+                            </div>
+                            <div class="url-divider">— or paste image URL / Google Drive share link —</div>
+                            <input type="url" id="banner-image-field" class="form-control" placeholder="https://drive.google.com/file/d/... or any image URL">
+                        </div>
+                        <div class="form-group">
+                            <div class="featured-check-wrapper">
+                                <input type="checkbox" id="banner-active-field" checked>
+                                <label for="banner-active-field">Activate slideshow banner instantly</label>
+                            </div>
+                        </div>
+                        <div class="action-row-btns">
+                            <button type="submit" class="btn-action">Save Banner</button>
+                            <button type="button" class="btn-cancel" onclick="closeForm('banner-form-section', 'banner-crud-form')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Banner Preview</th>
+                                <th>Active Status</th>
+                                <th style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banners-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 4: Portfolio Recent Works Panel -->
+            <div class="tab-panel" id="panel-portfolio">
+                <div class="panel-header">
+                    <h2 class="panel-title">Masonry Portfolios Manager</h2>
+                    <button class="btn-action" onclick="toggleForm('portfolio-form-section')"><i class="fa fa-plus"></i> Add Project Image</button>
+                </div>
+
+                <!-- Portfolio CRUD Form -->
+                <div class="form-section" id="portfolio-form-section">
+                    <h3 class="form-section-title" id="portfolio-form-header-title"><i class="fa fa-camera-retro"></i> Add Brand Portfolio Project</h3>
+                    <form id="portfolio-crud-form">
+                        <input type="hidden" id="portfolio-id-field">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolio-title-field">Project / Item Title</label>
+                                <input type="text" id="portfolio-title-field" class="form-control" placeholder="e.g. Annual gala custom trophies" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="portfolio-client-field">Corporate Client Name</label>
+                                <input type="text" id="portfolio-client-field" class="form-control" placeholder="e.g. BRAC Bank Ltd." required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolio-tag-field">Segment Portfolio Tag</label>
+                                <select id="portfolio-tag-field" class="form-control" required>
+                                    <option value="Crests">Crests & Awards</option>
+                                    <option value="Mugs">Printed Mugs</option>
+                                    <option value="Diaries">Notebooks & Diaries</option>
+                                    <option value="Key Rings">Key Rings</option>
+                                    <option value="Gift Boxes">Gift Boxes & VIP sets</option>
+                                    <option value="Bottles">Flasks & Bottles</option>
+                                    <option value="Promotional">Promotional apparel</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Branding Work Photo</label>
+                                <div class="upload-zone" id="portfolio-upload-zone">
+                                    <input type="file" id="portfolio-image-file" accept="image/*">
+                                    <span class="upload-zone-label"><i class="fa fa-cloud-upload-alt"></i> Click or drag to upload work photo</span>
+                                </div>
+                                <div class="upload-progress" id="portfolio-upload-progress">
+                                    <div class="upload-progress-bar" id="portfolio-upload-bar"></div>
+                                </div>
+                                <div class="url-divider">— or paste image URL / Google Drive share link —</div>
+                                <input type="url" id="portfolio-image-field" class="form-control" placeholder="https://drive.google.com/file/d/... or any image URL">
+                            </div>
+                        </div>
+                        <div class="action-row-btns">
+                            <button type="submit" class="btn-action">Save Portfolio</button>
+                            <button type="button" class="btn-cancel" onclick="closeForm('portfolio-form-section', 'portfolio-crud-form')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Project Detail</th>
+                                <th>Client Name</th>
+                                <th>Filter Tag</th>
+                                <th style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolio-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 5: SEO and Global Configuration Settings Panel -->
+            <div class="tab-panel" id="panel-settings">
+                <div class="panel-header">
+                    <h2 class="panel-title">SEO Optimization & Global Configuration</h2>
+                </div>
+
+                <div class="info-card">
+                    <i class="fa fa-info-circle"></i>
+                    <div class="info-card-desc">
+                        <h4>Realtime Meta Tag Updates</h4>
+                        <p>Changes written to these inputs modify the Google search crawl targets of Samio Enterprise globally. Dynamic meta parameters are applied in storefront instantly.</p>
+                    </div>
+                </div>
+
+                <form id="global-settings-form">
+                    <h3 class="form-section-title" style="display:block;"><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp Direct Widget Setup</h3>
+                    <div class="form-group">
+                        <label for="settings-whatsapp-field">Target Business WhatsApp Number (Bangladesh Format)</label>
+                        <input type="text" id="settings-whatsapp-field" class="form-control" placeholder="e.g. 8801711223344 (No plus signs)" required>
+                        <span class="help-text" style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:6px; font-style:italic;">Make sure to specify number in exact country code format (e.g. 880XXXXXXXXXX for Bangladesh) to avoid broken triggers.</span>
+                    </div>
+
+                    <h3 class="form-section-title" style="display:block; margin-top:40px;"><i class="fa fa-search"></i> Storefront SEO Strategy</h3>
+                    <div class="form-group">
+                        <label for="settings-seo-title">Google Browser Title Meta</label>
+                        <input type="text" id="settings-seo-title" class="form-control" placeholder="Meta title..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-seo-desc">Google Description Meta</label>
+                        <textarea id="settings-seo-desc" class="form-control" rows="3" placeholder="Compelling meta description summary..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-seo-keywords">Target Keywords Search Targets (Comma Separated)</label>
+                        <input type="text" id="settings-seo-keywords" class="form-control" placeholder="e.g. Corporate gift Bangladesh, Custom printed mug BD" required>
+                    </div>
+
+                    <div style="margin-top:40px; display:flex; gap:16px;">
+                        <button type="submit" class="btn-action"><i class="fa fa-save"></i> Save Global Configurations</button>
+                        <button type="button" class="btn-cancel" style="background-color:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.2); color:#ef4444;" onclick="resetDemoData()"><i class="fa fa-undo"></i> Restore Default Seeds</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Administrative Quick notifications box -->
+    <div class="notification" id="admin-notification-toast">Task executed successfully!</div>
+
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
+    <!-- Firebase Config (shared) -->
+    <script src="js/firebase-config.js"></script>
+    <!-- Admin Application Script -->
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\\(Get-Content \"d:\\\\samio\\\\index.html\"\\).Count; \\(Get-Content \"d:\\\\samio\\\\admin.html\"\\).Count)"
+    ]
+  }
+}

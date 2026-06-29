@@ -1,0 +1,136 @@
+/* ===== Responsive Media Queries ===== */
+
+/* Mobile only — logo size */
+@media screen and (max-width: 480px) {
+    .logo-img {
+        height: 50px;
+    }
+}
+
+/* ===== Tablet / Medium Screens ===== */
+@media (max-width: 992px) {
+    .hero-swiper { height: auto; }
+    .hero-slide  { aspect-ratio: 16 / 7; }
+    .hero-bg-img { object-fit: contain; background-color: var(--navy-dark); }
+    .modal-details-column {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+    }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+}
+
+/* ===== Mobile Screens ===== */
+@media (max-width: 768px) {
+    /* Show mobile controls, hide desktop nav */
+    .mobile-header-controls { display: flex; }
+    nav { display: none; }
+
+    /* Logo */
+    .logo-title { font-size: 1.25rem; letter-spacing: 3px; }
+    .logo-sub { font-size: 0.58rem; letter-spacing: 2px; }
+    .logo-img { height: 50px; }
+    .logo-text { margin-left: 12px; padding-left: 13px; gap: 2px; }
+
+    /* Hero — use landscape aspect-ratio so the container matches photo proportions.
+       object-fit: contain shows the full image with no side-cropping;
+       background fills the small letterbox gap if image ratio isn't exactly 16:9. */
+    .hero-swiper { height: auto; }
+    .hero-slide  { aspect-ratio: 16 / 9; min-height: unset; }
+    .hero-bg-img { object-fit: contain; background-color: var(--navy-dark); }
+    .swiper-button-next, .swiper-button-prev { width: 38px; height: 38px; }
+
+    /* Sections */
+    section { padding: 4rem 0; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-title { font-size: 1.9rem; }
+
+    /* Stats */
+    .stat-number { font-size: 1.7rem; }
+
+    /* Floating WhatsApp widget — force visible on mobile */
+    .whatsapp-bubble { display: none; }
+    .whatsapp-floating-widget {
+        display: flex !important;
+        bottom: 20px;
+        right: 16px;
+        z-index: 9999;
+    }
+    .whatsapp-btn {
+        width: 58px;
+        height: 58px;
+        font-size: 1.8rem;
+        animation: waPulse 2s ease-out infinite;
+    }
+    .scroll-top-btn { bottom: 90px; right: 16px; }
+
+    /* Products page */
+    .products-page-filter-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .products-header-banner { padding: 3rem 0 2rem; }
+    .products-page-title { font-size: 2rem; }
+
+    /* Modal — bottom sheet style on mobile */
+    .modal { padding: 0; align-items: flex-end; }
+    .modal-card { border-radius: 20px 20px 0 0; max-height: 92vh; }
+    .modal-img-column, .modal-details-column { flex: 1 1 100%; padding: 20px; }
+    .modal-main-img-wrapper { height: 250px; }
+    .modal-product-title { font-size: 1.6rem; }
+    .related-products-section { padding: 24px 20px; }
+}
+
+/* ===== Small Mobile Screens ===== */
+@media (max-width: 480px) {
+    .container { padding: 0 14px; }
+
+    /* Logo */
+    .logo-title { font-size: 1.1rem; letter-spacing: 2.5px; }
+    .logo-sub { display: none; }
+    .logo-img { height: 46px; }
+    .logo-text { margin-left: 10px; padding-left: 11px; }
+    .mobile-header-controls { gap: 8px; }
+    .hamburger-btn, .mobile-search-icon { width: 40px; height: 40px; }
+
+    .btn-gold, .btn-navy-outline { padding: 10px 18px; font-size: 0.88rem; }
+
+    /* Stats */
+    .stats-bar { padding: 1.4rem 0; }
+    .stat-number { font-size: 1.4rem; }
+    .stat-label { font-size: 0.68rem; }
+
+    /* Sections */
+    section { padding: 3rem 0; }
+    .section-title { font-size: 1.6rem; }
+    .section-header { margin-bottom: 2rem; }
+
+    /* Grids — 2 columns on small mobile */
+    .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .category-img-wrapper { height: 130px; }
+    .category-name { font-size: 0.92rem; }
+    .category-info { padding: 10px 12px; }
+
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .product-img-wrapper { height: 155px; }
+    .product-info { padding: 11px; }
+    .product-title { font-size: 0.92rem; }
+    .product-desc { font-size: 0.8rem; margin-bottom: 12px; }
+    .btn-view-details { font-size: 0.78rem; padding: 8px 10px; }
+    .btn-whatsapp-inquire { width: 36px; height: 36px; }
+    .product-actions { gap: 8px; }
+
+    /* Portfolio */
+    .portfolio-masonry { columns: 2 140px; column-gap: 10px; }
+    .portfolio-item { margin-bottom: 10px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    footer { padding: 3.5rem 0 2rem; }
+    .copyright-bar { flex-direction: column; text-align: center; gap: 12px; }
+    .copyright-links { justify-content: center; flex-wrap: wrap; gap: 10px; }
+
+    /* Scroll top button */
+    .scroll-top-btn { bottom: 86px; right: 14px; width: 40px; height: 40px; }
+
+    /* WhatsApp widget on very small screens */
+    .whatsapp-floating-widget { bottom: 16px; right: 14px; }
+    .whatsapp-btn { width: 54px; height: 54px; font-size: 1.65rem; }
+}

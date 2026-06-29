@@ -1,0 +1,421 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samio Enterprise - Premium Corporate Gifts & Crest Awards</title>
+    
+    <!-- Meta tags for SEO - Dynamically updated by Settings -->
+    <meta name="description" id="meta-description" content="Premium corporate showcase website for Samio Enterprise, corporate gift and crest awards supplier in Bangladesh.">
+    <meta name="keywords" id="meta-keywords" content="Corporate gift Bangladesh, Custom printed mug BD, Crest award supplier, Promotional items Bangladesh">
+    
+    <!-- External CSS & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Page Loading Overlay (shown while Firestore data loads) -->
+    <div id="page-loading-overlay">
+        <div class="loading-spinner"></div>
+        <span class="loading-text">Loading catalogue…</span>
+    </div>
+
+    <!-- Header Navigation Section -->
+    <header id="site-header">
+        <div class="container header-container">
+            <a href="#" class="logo" id="home-logo-link">
+                <!-- If Asset 2.png load fails, custom CSS monogram acts as elegant fallback -->
+                <img src="Asset 2.png" alt="Samio Enterprise Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
+                <div id="logo-fallback" style="display:none; width:45px; height:45px; border-radius:50%; background:var(--gold-cream); border:2px solid var(--gold-primary); color:var(--navy-dark); font-weight:700; align-items:center; justify-content:center; font-family:'Playfair Display', serif;">S</div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-anchor" data-target="home">Home</a></li>
+                    <li><a href="#" class="nav-anchor" data-target="categories-anchor">Categories</a></li>
+                    <li><a href="#" class="nav-anchor" data-target="featured-anchor">Featured</a></li>
+                    <li><a href="#" class="nav-anchor" data-target="portfolio-anchor">Recent Work</a></li>
+                    <li><a href="#" class="nav-anchor" data-target="testimonials-anchor">Testimonials</a></li>
+                </ul>
+                
+                <!-- Autocomplete instant search widget button -->
+                <div class="search-trigger" id="search-widget-trigger">
+                    <i class="fa fa-search"></i>
+                    <span>Search corporate gifts...</span>
+                </div>
+            </nav>
+
+            <!-- Mobile Controls: search icon + hamburger (visible on mobile only) -->
+            <div class="mobile-header-controls">
+                <button class="mobile-search-icon" id="mobile-search-icon" aria-label="Search Products">
+                    <i class="fa fa-search"></i>
+                </button>
+                <button class="hamburger-btn" id="hamburger-toggle" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
+    <!-- Mobile Navigation Drawer (slide in from right) -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" role="navigation" aria-label="Mobile Navigation">
+        <div class="mobile-nav-header">
+            <div class="mobile-nav-brand">
+                Samio Enterprise
+                <small>Premium Corporate Gifts</small>
+            </div>
+            <button class="mobile-nav-close" id="mobile-nav-close-btn" aria-label="Close Menu">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <!-- Search -->
+        <div class="mobile-drawer-search">
+            <button class="mobile-nav-search-btn" id="mobile-nav-search-btn">
+                <i class="fa fa-search"></i>
+                <span>Search corporate gifts...</span>
+            </button>
+        </div>
+
+        <!-- Categories list -->
+        <div class="mobile-drawer-categories">
+            <div class="mobile-drawer-cat-title">
+                <i class="fa fa-th-large"></i> Categories
+            </div>
+            <div id="mobile-categories-submenu"></div>
+        </div>
+
+        <!-- WhatsApp CTA -->
+        <div class="mobile-drawer-wa">
+            <a href="#" id="mobile-whatsapp-cta" class="mobile-whatsapp-cta" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Fuzzy Search Bar Overlay Modal -->
+    <div class="search-modal" id="search-bar-modal">
+        <div class="search-box-container">
+            <div class="search-input-wrapper">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Type printed mug, award crest, executive notebook..." id="search-input-field" autocomplete="off">
+                <button class="search-close" id="search-close-button"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="search-suggestions" id="search-suggestions-dropdown">
+                <!-- Suggestions generated by Fuzzy Match dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Front-facing Client Workspace -->
+    <main id="storefront-content">
+        
+        <!-- Hero Slideshow Banner Section -->
+        <section class="hero-section" id="section-home">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper" id="hero-slider-wrapper">
+                    <!-- Slides loaded dynamically from db -->
+                </div>
+                <!-- Swiper navigation bullets & arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <!-- Stats / Trust Bar -->
+        <div class="stats-bar">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Corporate Clients</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Years Excellence</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Items Delivered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Custom Branded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Showcase Section -->
+        <section id="section-categories">
+            <div class="container" id="categories-anchor">
+                <div class="section-header">
+                    <span class="section-tag">Corporate Catalogue</span>
+                    <h2 class="section-title">Product Categories</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-desc">Search through our diverse segments of customized merchandise designed to strengthen your branding portfolio.</p>
+                </div>
+                <div class="categories-grid" id="catalogue-categories-grid">
+                    <!-- Dynamic categories cards loader -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section id="section-featured">
+            <div class="container" id="featured-anchor">
+                <div class="section-header">
+                    <span class="section-tag">Best Sellers</span>
+                    <h2 class="section-title">Featured Collections</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-desc">Explore our top trending, high-quality customizable executive items representing superior corporate excellence.</p>
+                </div>
+                <div class="products-grid" id="featured-products-grid">
+                    <!-- Dynamic featured product cards load here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Masonry Portfolio Section -->
+        <section id="section-portfolio">
+            <div class="container" id="portfolio-anchor">
+                <div class="section-header">
+                    <span class="section-tag">Corporate Proof</span>
+                    <h2 class="section-title">Recent Branding Works</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-desc">Real branding samples and printing works delivered to major organizations and companies in Bangladesh.</p>
+                </div>
+                
+                <div class="portfolio-filter-container" id="portfolio-category-filters">
+                    <!-- Dynamic filters populated by category tags -->
+                </div>
+                
+                <div class="portfolio-masonry" id="portfolio-gallery-masonry">
+                    <!-- Dynamic masonry images will fill here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Carousel Section -->
+        <section class="testimonials-section" id="section-testimonials">
+            <div class="container" id="testimonials-anchor">
+                <div class="section-header">
+                    <span class="section-tag">Trust & Assurance</span>
+                    <h2 class="section-title">Client Testimonials</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-desc">Read about the premium experiences of companies who trusted us with their prestige gifting supplies.</p>
+                </div>
+                <div class="swiper testimonials-swiper">
+                    <div class="swiper-wrapper" id="testimonials-card-wrapper">
+                        <!-- Loaded dynamically or static default cards -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Samio Enterprise exceeded our expectations with their prompt delivery of 500 premium crest awards for our annual summit. The custom gold detailing was spectacular, and they accommodated our tight schedule."</p>
+                                <h4 class="testimonial-author">Rakibul Hasan</h4>
+                                <p class="testimonial-company">BRAC Bank Ltd.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"We have been ordering corporate printed mugs, custom diaries, and promotional pen kits from Samio for our employee onboarding. The light navy print alignment and color matches are perfect. Recommended!"</p>
+                                <h4 class="testimonial-author">Farhana Chowdhury</h4>
+                                <p class="testimonial-company">Unilever Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"The metallic laser engraved keyrings and customized leather desk boxes we ordered received outstanding feedback from our executive delegates. Outstanding service."</p>
+                                <h4 class="testimonial-author">Tariqul Islam</h4>
+                                <p class="testimonial-company">Grameenphone Ltd.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Specific Category Products Page (Hidden initially, toggled by router) -->
+    <div class="products-page" id="category-products-view-page">
+        <div class="products-header-banner">
+            <div class="container">
+                <button type="button" class="btn-back-to-home" id="close-category-page-btn">
+                    <i class="fa fa-arrow-left"></i> Return to Catalogue
+                </button>
+                <h1 class="products-page-title" id="page-header-title">Commemorative Crests</h1>
+                <p class="products-page-desc" id="page-header-desc">Elegant acrylic, crystal and wooden shields designed for high recognition standards.</p>
+            </div>
+        </div>
+        <div class="products-page-content">
+            <div class="container">
+                <div class="products-page-filter-bar">
+                    <span class="products-count-label" id="category-products-count-label">Showing 0 corporate items</span>
+                    <div class="products-page-sort">
+                        <label for="product-sorting-select"><i class="fa fa-sort"></i> Sort By:</label>
+                        <select id="product-sorting-select">
+                            <option value="default">Default Catalogue</option>
+                            <option value="name-asc">Name: A-Z</option>
+                            <option value="name-desc">Name: Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products-grid" id="category-specific-products-grid">
+                    <!-- Products dynamically rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal Overlay -->
+    <div class="modal" id="product-detail-modal">
+        <div class="modal-card">
+            <button class="close-modal" id="close-product-modal-btn"><i class="fa fa-times"></i></button>
+            <div class="modal-body">
+                
+                <!-- Left Image Column with hover Zoom & Gallery selector -->
+                <div class="modal-img-column">
+                    <div class="modal-main-img-wrapper" id="main-image-zoom-frame">
+                        <img src="" alt="" class="modal-main-img" id="detail-modal-main-img">
+                    </div>
+                    <div class="modal-thumbnails" id="detail-modal-thumbnails-strip">
+                        <!-- Thumbnail images populated dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Right details description & tags column -->
+                <div class="modal-details-column">
+                    <span class="modal-product-cat" id="detail-modal-category">Awards</span>
+                    <h2 class="modal-product-title" id="detail-modal-title">Luxury Glass Trophy</h2>
+                    <p class="modal-product-desc" id="detail-modal-desc">Detailed premium descriptions of items will appear here explaining customization parameters, logo integration details, material specs.</p>
+                    
+                    <div class="modal-tags" id="detail-modal-tags-list">
+                        <!-- Tags rendered as beautiful badges -->
+                    </div>
+                    
+                    <!-- Direct Dynamic WhatsApp Trigger -->
+                    <a href="#" target="_blank" class="modal-action-btn-whatsapp" id="detail-modal-whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Inquire pricing on WhatsApp
+                    </a>
+                </div>
+                
+            </div>
+            
+            <!-- Bottom Related Products Showcase inside modal -->
+            <div class="related-products-section">
+                <h3 class="related-products-title">Related Showcase Items</h3>
+                <div class="related-products-grid" id="detail-modal-related-grid">
+                    <!-- Related product cards rendered here -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Scroll To Top Button -->
+    <button class="scroll-top-btn" id="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <!-- Floating Dynamic WhatsApp Widget -->
+    <div class="whatsapp-floating-widget">
+        <div class="whatsapp-bubble" id="whatsapp-bubble-msg">Need a premium quote? Chat on WhatsApp!</div>
+        <a href="#" target="_blank" class="whatsapp-btn" id="floating-whatsapp-widget-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Footer Area -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="Asset 2.png" alt="Samio Enterprise" class="footer-logo-img" onerror="this.style.display='none'">
+                        <div>
+                            <span class="footer-logo-title" style="display:block; line-height:1.2;">Samio Enterprise</span>
+                            <span class="footer-logo-sub" style="display:block;">Premium Corporate Gifts · Dhaka</span>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Specialized premium supplier of premium commemorative shields, corporate souvenirs, executive desk gift items, printed mugs, and keyrings in Dhaka, Bangladesh.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-quick-links">
+                    <h3 class="footer-title">Product Segments</h3>
+                    <ul class="footer-links" id="footer-categories-list">
+                        <!-- Populated dynamically with up to 5 categories -->
+                    </ul>
+                </div>
+                
+                <div class="footer-nav-links">
+                    <h3 class="footer-title">Company Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="nav-anchor" data-target="home">Storefront Home</a></li>
+                        <li><a href="#" class="nav-anchor" data-target="categories-anchor">Catalogue Grid</a></li>
+                        <li><a href="#" class="nav-anchor" data-target="featured-anchor">Featured Souvenirs</a></li>
+                        <li><a href="#" class="nav-anchor" data-target="portfolio-anchor">Recent Portfolios</a></li>
+                        <li><a href="admin.html">Dashboard Portal</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-title">Corporate Office</h3>
+                    <div class="footer-contact-item">
+                        <i class="fa fa-map-marker-alt"></i>
+                        <span>166 Dhaka University Market, Katabon, Dhaka</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa fa-phone"></i>
+                        <span id="footer-phone-display">+8801625627131</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa fa-envelope"></i>
+                        <span>info@samioenterprise.com</span>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="copyright-bar">
+                <p>&copy; 2026 Samio Enterprise. Premium Corporate showcase website. All rights reserved.</p>
+                <div class="copyright-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Corporate Terms</a>
+                    <a href="admin.html">Admin Access Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CDN Script Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Config (shared) -->
+    <script src="js/firebase-config.js"></script>
+    <!-- Main Application Script -->
+    <script src="js/main.js"></script>
+</body>
+</html>
