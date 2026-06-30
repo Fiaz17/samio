@@ -3,7 +3,7 @@ const db = firebase.firestore();
 
 // Fallback settings used if Firestore has no settings doc yet
 const defaultSettings = {
-    whatsappNumber: '8801711223344',
+    whatsappNumber: '8801625627131',
     seoTitle: 'Samio Enterprise | Premium Corporate Gifts & Crest Awards Supplier BD',
     seoDescription: 'Samio Enterprise is the leading corporate gift, crest awards, and personalized printing supplier in Bangladesh.',
     seoKeywords: 'Corporate gift Bangladesh, Custom printed mug BD, Crest award supplier, Promotional items Bangladesh, Executive gifts Dhaka'
